@@ -51,10 +51,21 @@ var Seex = function() {
     this.refresh = function() {
         for (var i = 0; i < this.allElements.length; i++) {
             var startingText = this.allElements[i].innerText;
-            this.allElements[i].innerText = this._getWordForDirection(
+            var endingPunctuation = (!!~'.,:;'.indexOf(startingText.slice(-1)) ?
+                    startingText.slice(-1) : '');
+            var isCapitalized = startingText.charCodeAt(0) <= 90 &&
+                    startingText.charCodeAt(0) >= 65;
+            
+            
+            var newWord = this._getWordForDirection(
                     this.allElements[i],
                     this._$(this.allElements[i].attributes['data-seex-target'].value)[0]
             );
+
+            if (isCapitalized) newWord = newWord[0].toUpperCase() + newWord.slice(1);
+            if (!!endingPunctuation) newWord += endingPunctuation;
+            
+            return newWord;
         }
     };
 
