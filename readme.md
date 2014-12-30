@@ -37,9 +37,18 @@ You can include a dictionary of options:
 
 ```
 Seex.begin({
-    // no options just yet!
+    horizontalPreference: 0.7,
+    linkToTarget:         true
 });
 ```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `horizontalPreference` | Skew the decision to say horizontal words versus vertical words. Numbers over 1 prefer sideways words. Numbers less than 1 prefer vertical words. | `0.7` |
+| `linkToTarget` | Change the HTML of the element to link to the target element with `href="#YOUR_ID_HERE"`. | true |
+
+
+
 
 You can force a refresh:
 
