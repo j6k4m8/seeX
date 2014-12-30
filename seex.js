@@ -10,7 +10,7 @@ var Seex = function() {
         S: 'below',
         E: 'at right',
         W: 'at left'
-    ];
+    };
     
 
     this._$ = function(el) {
@@ -28,7 +28,7 @@ var Seex = function() {
     };
 
     this._getWordForDirection = function(_seex, _target, _axis) {
-        var vector = _getElementVectorToOther(_seex, _target);
+        var vector = this._getElementVectorToOther(_seex, _target);
         var absVector = [Math.abs(vector[0]), Math.abs(vector[1])];
 
         if (!_axis) {
@@ -45,12 +45,16 @@ var Seex = function() {
 
     this.begin = function(opts) {
         // do something with opts i guess
-        this.allElements = _$('.seex');
+        this.allElements = this._$('.seex');
     };
 
-    this._refresh = function() {
-        for (var i = 0; i < this.allElements.lenth; i++) {
-            var startingText = allElements[i].innerText;
+    this.refresh = function() {
+        for (var i = 0; i < this.allElements.length; i++) {
+            var startingText = this.allElements[i].innerText;
+            this.allElements[i].innerText = this._getWordForDirection(
+                    this.allElements[i],
+                    this._$(this.allElements[i].attributes['data-seex-target'].value)[0]
+            );
         }
     };
 
