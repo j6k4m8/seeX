@@ -65,7 +65,7 @@ var Seex = function() {
             if (isCapitalized) newWord = newWord[0].toUpperCase() + newWord.slice(1);
             if (!!endingPunctuation) newWord += endingPunctuation;
             
-            return newWord;
+            this.allElements[i].innerText = newWord;
         }
     };
 
