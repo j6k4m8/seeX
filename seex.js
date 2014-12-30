@@ -53,6 +53,7 @@ var Seex = function() {
         // do something with opts i guess
         this.allElements = this._$('.seex');
         opts.horizontalPreference ? this._horizontalPreference = opts.horizontalPreference;
+        this.refresh();
     };
 
     this.refresh = function() {
