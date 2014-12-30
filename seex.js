@@ -32,7 +32,7 @@ var Seex = function() {
         var absVector = [Math.abs(vector[0]), Math.abs(vector[1])];
 
         if (!_axis) {
-            _axis = (absVector[0] >= absVector[1] ? this._AXES.H : this._AXES.V);
+            _axis = (absVector[0] > absVector[1] ? this._AXES.H : this._AXES.V);
         } 
 
         if (_axis == this._AXES.H) {
