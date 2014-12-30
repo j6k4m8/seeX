@@ -1,5 +1,7 @@
 # Seex
 
+**Work in progress!** Pull-requests welcome. 
+
 Seex.js aims to fix the common problem where responsive design results in sentences like "See the figure at left..." when the figure is really on top or below the paragraph.
 
 Simply mark a span of text with the class `.seex` and give it the attribute, `data-seex-target="#your-target-id"` and seex.js will change the inside text to match the *real* location of your element or figure.
