@@ -2,6 +2,7 @@ var Seex = function() {
     
     // If something is 100px right and 70px up, call it above.
     this._horizontalPreference = 0.7;
+    this._linkToTarget = true;
 
     this._AXES = {
         V: 'vertical',
@@ -50,32 +51,42 @@ var Seex = function() {
 
 
     this.begin = function(opts) {
-        // do something with opts i guess
         this.allElements = this._$('.seex');
-        opts.horizontalPreference ? this._horizontalPreference = opts.horizontalPreference;
+        if (opts) {
+            // do something with opts i guess
+            opts.horizontalPreference ? this._horizontalPreference = opts.horizontalPreference : '';
+            opts.linkToTarget ? this._linkToTarget = opts.linkToTarget : '';
+        }
         this.refresh();
     };
 
     this.refresh = function() {
         for (var i = 0; i < this.allElements.length; i++) {
-            var startingText = this.allElements[i].innerText;
+            var pgraph = this.allElements[i];
+            var target = this._$(this.allElements[i].attributes['data-seex-target'].value)[0];
+
+            var startingText = pgraph.innerText;
             var endingPunctuation = (!!~'.,:;'.indexOf(startingText.slice(-1)) ?
                     startingText.slice(-1) : '');
             var isCapitalized = startingText.charCodeAt(0) <= 90 &&
                     startingText.charCodeAt(0) >= 65;
             
-            
             var newWord = this._getWordForDirection(
-                    this.allElements[i],
-                    this._$(this.allElements[i].attributes['data-seex-target'].value)[0]
+                pgraph,
+                target
             );
 
             if (isCapitalized) newWord = newWord[0].toUpperCase() + newWord.slice(1);
             if (!!endingPunctuation) newWord += endingPunctuation;
             
-            this.allElements[i].innerText = newWord;
+            if (this._linkToTarget) {
+                this.allElements[i].innerHTML = "<a class='seex-link' href='#" + 
+                        target.attributes['id'].value +
+                        "'>" + newWord + "</a>";
+            } else {
+                this.allElements[i].innerText = newWord;
+            }
         }
     };
-
 };
         
