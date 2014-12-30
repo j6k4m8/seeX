@@ -1,5 +1,8 @@
 var Seex = function() {
     
+    // If something is 100px right and 70px up, call it above.
+    this._horizontalPreference = 0.7;
+
     this._AXES = {
         V: 'vertical',
         H: 'horizontal'
@@ -32,10 +35,14 @@ var Seex = function() {
         var absVector = [Math.abs(vector[0]), Math.abs(vector[1])];
 
         if (!_axis) {
-            _axis = (absVector[0] > absVector[1] ? this._AXES.H : this._AXES.V);
+            _axis = (absVector[0] * this._horizontalPreference > absVector[1] ? this._AXES.H : this._AXES.V);
         } 
 
         if (_axis == this._AXES.H) {
+            // Ideally, we would check to see if the paragraph's RIGHT is
+            // to the LEFT of the figure's LEFT. Only then can we call it
+            // "to the right" of the text. Otherwise it's very ambiguous.
+            
             return vector[0] > 0 ? this._directions.W : this._directions.E;
         } else {
             return vector[1] > 0 ? this._directions.N : this._directions.S;
